@@ -1,0 +1,15 @@
+#:kivy 2.0.0
+#:include components/saveComponent/saveComponent.kv
+#:include components/listComponent/listComponent.kv
+##:kivymd 0.104.2
+
+<Body>:
+    orientation: "vertical"
+
+    MDToolbar:
+        title: "Groupement d'Interet Economique (GIE) Djiguiya".upper()
+
+    MDTabs:
+        id: tabs
+        on_tab_switch: app.on_tab_switch(*args)
+        tab_hint_x: True
