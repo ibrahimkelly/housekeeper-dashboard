@@ -32,15 +32,19 @@ class Main(MDApp):
 
         if tab_text == 'Employers':
             employees_list = backend.getEmployeesByNom('tous')
-            for employee in employees_list:
+            instance_tab.ids.listContainer.clear_widgets()
+            for i in range(len(employees_list)):
                 instance_tab.ids.listContainer.add_widget(
-                    TwoLineIconListItem(
-                        text=f'{employee[1]} {employee[2]} {employee[3]}',
-                        secondary_text=f'Paiements : {employee[4]} F CFA -> Dettes : {employee[5]} F CFA -> Epargne : {employee[6]} F CFA',
-                        theme_text_color='Custom',
-                        text_color=self.theme_cls.primary_color,
+                    ThreeLineIconListItem(
+                        text=f'{employees_list[i][1]} {employees_list[i][2]} {employees_list[i][3]}',
+                        secondary_text=f'PAIEMENTS : [b][color=#ff0]{employees_list[i][4]} F CFA[/color][/b]',
+                        tertiary_text=f'EPARGNE : [b][color=#ff0]{employees_list[i][6]} F CFA[/color][/b]',
+                        theme_text_color='Primary',
                         font_style='H6',
-                        secondary_theme_text_color='Primary'
+                        secondary_theme_text_color='Primary',
+                        tertiary_theme_text_color='Primary',
+                        bg_color= (0, 0, 0) if i%2==0 else self.theme_cls.primary_color,
+                        on_release=lambda x: print(employees_list[i][0])
                     )
                 )
 
