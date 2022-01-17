@@ -7,12 +7,10 @@ Created on Tue Dec 01 08:00:00 2020
 """
 
 import sqlite3
-from typing import List, Any
-
 
 class DataBase:
     def __init__(self):
-        self.connection = sqlite3.connect("BaseDeDonnee.db")
+        self.connection = sqlite3.connect("files/BaseDeDonnee.db")
         self.curseur = self.connection.cursor()
 
         database_tables = """CREATE TABLE IF NOT EXISTS employees
@@ -93,7 +91,7 @@ class DataBase:
 
     def getEmployeesByNom(self, nom: str) -> list:
         if (nom=='Tous' or nom=='tous'):
-            query = """SELECT id, prenom, surnom, nom, date_entrer, salaire, total_paiement, total_dette, epargne FROM employees"""
+            query = """SELECT id, prenom, surnom, nom, total_paiement, total_dette, epargne FROM employees"""
             self.curseur.execute(query)
             result = self.curseur.fetchall()
             return result
