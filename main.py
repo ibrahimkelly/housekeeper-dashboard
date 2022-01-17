@@ -43,8 +43,8 @@ class Main(MDApp):
                         font_style='H6',
                         secondary_theme_text_color='Primary',
                         tertiary_theme_text_color='Primary',
-                        bg_color= (0, 0, 0) if i%2==0 else self.theme_cls.primary_color,
-                        on_release=lambda x: print(employees_list[i][0])
+                        bg_color=(0, 0, 0) if i%2==0 else self.theme_cls.primary_color,
+                        on_release=lambda x=i: print(x.text)
                     )
                 )
 
