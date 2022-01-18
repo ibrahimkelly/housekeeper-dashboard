@@ -1,7 +1,6 @@
-from kivy.metrics import dp
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.list import ThreeLineIconListItem, TwoLineIconListItem, IconLeftWidget
+from kivymd.uix.list import ThreeLineIconListItem
 
 from components.listComponent.Employees import Employees
 from components.saveComponent.Save import Save
@@ -44,9 +43,13 @@ class Main(MDApp):
                         secondary_theme_text_color='Primary',
                         tertiary_theme_text_color='Primary',
                         bg_color=(0, 0, 0) if i%2==0 else self.theme_cls.primary_color,
-                        on_release=lambda x=i: print(x.text)
+                        on_release=self.showEmployeesDetails
                     )
                 )
+    def showEmployeesDetails(self, instence) -> None:
+        prenom, surnom, nom = instence.text.split(' ')
+        foundUser = backend.getEmployeesByFullName(prenom, surnom, nom)
+        print(foundUser)
 
 if __name__=='__main__':
     Main().run()

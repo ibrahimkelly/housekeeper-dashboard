@@ -5,11 +5,25 @@
 
 <Body>:
     orientation: "vertical"
+    MDNavigationLayout:
+        ScreenManager:
+            MDScreen:
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "GIE Djiguiya"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
 
-    MDToolbar:
-        title: "Groupement d'Interet Economique (GIE) Djiguiya".upper()
+                    MDTabs:
+                        id: tabs
+                        on_tab_switch: app.on_tab_switch(*args)
+                        tab_hint_x: True
 
-    MDTabs:
-        id: tabs
-        on_tab_switch: app.on_tab_switch(*args)
-        tab_hint_x: True
+        MDNavigationDrawer:
+            id: nav_drawer
+            size_hint_x: 0.75
+            MDLabel:
+                text: 'Hello World'
+                halign: "center"
+

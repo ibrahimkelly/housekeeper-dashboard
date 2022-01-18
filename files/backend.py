@@ -101,6 +101,12 @@ class DataBase:
             result = self.curseur.fetchall()
             return result
 
+    def getEmployeesByFullName(self, prenom: str, surnom: str, nom: str):
+        query = """SELECT * FROM employees WHERE prenom=? AND surnom=? AND nom=?"""
+        self.curseur.execute(query, (prenom, surnom, nom))
+        result = self.curseur.fetchall()
+        return result
+
     def insertPaiement(self, id: int, annee: int):
         self.curseur.execute(f"INSERT INTO paiements('id_employee', 'annee') VALUES({id}, {annee})")
         self.connection.commit()
