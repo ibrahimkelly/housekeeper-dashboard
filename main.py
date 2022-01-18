@@ -1,3 +1,4 @@
+from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.list import ThreeLineIconListItem
@@ -10,14 +11,22 @@ from files.backend import *
 backend = DataBase()
 
 class Body(MDBoxLayout):
+
+    screenManager = ObjectProperty(None)
+
     def __init__(self, *args):
         super(Body, self).__init__(*args)
+
+    def backToHome(self):
+        self.screenManager.transition.direction = 'right'
+        self.screenManager.current = 'home'
 
 class Main(MDApp):
     def build(self):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
-        return Body()
+        self.body = Body()
+        return self.body
 
     def on_start(self):
         self.save = Save()
@@ -49,7 +58,7 @@ class Main(MDApp):
     def showEmployeesDetails(self, instence) -> None:
         prenom, surnom, nom = instence.text.split(' ')
         foundUser = backend.getEmployeesByFullName(prenom, surnom, nom)
-        print(foundUser)
+        self.body.screenManager.current = 'details'
 
 if __name__=='__main__':
     Main().run()

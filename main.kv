@@ -1,13 +1,15 @@
 #:kivy 2.0.0
 #:include components/saveComponent/saveComponent.kv
 #:include components/listComponent/listComponent.kv
-##:kivymd 0.104.2
 
 <Body>:
     orientation: "vertical"
+    screenManager: screenManager
     MDNavigationLayout:
         ScreenManager:
+            id: screenManager
             MDScreen:
+                name: 'home'
                 BoxLayout:
                     orientation: 'vertical'
                     MDToolbar:
@@ -19,6 +21,13 @@
                         id: tabs
                         on_tab_switch: app.on_tab_switch(*args)
                         tab_hint_x: True
+            MDScreen:
+                name: 'details'
+                MDToolbar:
+                    title: 'John Doe'
+                    left_action_items: [['arrow-left-circle', lambda x: root.backToHome()]]
+                MDBoxLayout:
+                    orientation: 'vertical'
 
         MDNavigationDrawer:
             id: nav_drawer
