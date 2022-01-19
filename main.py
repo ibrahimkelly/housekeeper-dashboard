@@ -4,6 +4,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.list import ThreeLineIconListItem
 
 from components.listComponent.Employees import Employees
+from components.paieComponent.paie import Paie
 from components.saveComponent.Save import Save
 
 from files.backend import *
@@ -20,6 +21,12 @@ class Body(MDBoxLayout):
     def backToHome(self):
         self.screenManager.transition.direction = 'right'
         self.screenManager.current = 'home'
+
+    def showEmployeesDetails(self, instence) -> None:
+        prenom, surnom, nom = instence.text.split(' ')
+        foundUser = Paie(prenom, surnom, nom)
+        self.screenManager.transition.direction = 'left'
+        self.screenManager.current = 'details'
 
 class Main(MDApp):
     def build(self):
@@ -52,13 +59,9 @@ class Main(MDApp):
                         secondary_theme_text_color='Primary',
                         tertiary_theme_text_color='Primary',
                         bg_color=(0, 0, 0) if i%2==0 else self.theme_cls.primary_color,
-                        on_release=self.showEmployeesDetails
+                        on_release=self.body.showEmployeesDetails
                     )
                 )
-    def showEmployeesDetails(self, instence) -> None:
-        prenom, surnom, nom = instence.text.split(' ')
-        foundUser = backend.getEmployeesByFullName(prenom, surnom, nom)
-        self.body.screenManager.current = 'details'
 
 if __name__=='__main__':
     Main().run()

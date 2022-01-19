@@ -1,6 +1,8 @@
 #:kivy 2.0.0
 #:include components/saveComponent/saveComponent.kv
 #:include components/listComponent/listComponent.kv
+#:include components/paieComponent/paieComponent.kv
+#:include components/customWidgets.kv
 
 <Body>:
     orientation: "vertical"
@@ -24,10 +26,88 @@
             MDScreen:
                 name: 'details'
                 MDToolbar:
+                    id: toolbar
                     title: 'John Doe'
+                    elevation: 10
+                    pos_hint: {"top": 1}
                     left_action_items: [['arrow-left-circle', lambda x: root.backToHome()]]
                 MDBoxLayout:
                     orientation: 'vertical'
+                    MDSwiper:
+                        size_hint_y: None
+                        height: root.height - toolbar.height - dp(40)
+                        y: root.height - self.height - toolbar.height - dp(20)
+                        MDSwiperItem:
+                            MDBoxLayout:
+                                orientation: 'vertical'
+                                PaiementRowMonth:
+                                    PaiementInput:
+                                        id: janvier
+                                        hint_text: "Janvier"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "janvier", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: fevrier
+                                        hint_text: "Février"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "fevrier", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: mars
+                                        hint_text: "Mars"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "mars", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: avril
+                                        hint_text: "Avril"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "avril", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                PaiementRowMonth:
+                                    PaiementInput:
+                                        id: mai
+                                        hint_text: "Mai"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "mai", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: juin
+                                        hint_text: "Juin"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "juin", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: juillet
+                                        hint_text: "Juillet"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "juillet", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: aout
+                                        hint_text: "Aout"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "aout", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                PaiementRowMonth:
+                                    PaiementInput:
+                                        id: septembre
+                                        hint_text: "Septembre"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "septembre", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: octobre
+                                        hint_text: "Octobre"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "octobre", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: novembre
+                                        hint_text: "Novembre"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "novembre", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                    PaiementInput:
+                                        id: decembre
+                                        hint_text: "Décembre"
+                                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "decembre", self.text)
+                                        on_text: root.updateSomme(idForPaiement.text)
+                                MDBoxLayout:
+                                    orientation: "horizontal"
+                                    InfosLabel:
+                                        id: total_paiement
+
 
         MDNavigationDrawer:
             id: nav_drawer
@@ -35,4 +115,3 @@
             MDLabel:
                 text: 'Hello World'
                 halign: "center"
-
