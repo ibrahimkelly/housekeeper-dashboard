@@ -3,8 +3,8 @@ from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.list import ThreeLineIconListItem
 
-from components.listComponent.Employees import Employees
-from components.paieComponent.paie import Paie
+from components.details.Details import Details
+from components.listComponent.List import List
 from components.saveComponent.Save import Save
 
 from files.backend import *
@@ -14,19 +14,25 @@ backend = DataBase()
 class Body(MDBoxLayout):
 
     screenManager = ObjectProperty(None)
+    details = ObjectProperty(None)
 
-    def __init__(self, *args):
-        super(Body, self).__init__(*args)
+    def __init__(self, **kwargs):
+        super(Body, self).__init__(**kwargs)
 
     def backToHome(self):
         self.screenManager.transition.direction = 'right'
         self.screenManager.current = 'home'
 
     def showEmployeesDetails(self, instence) -> None:
-        prenom, surnom, nom = instence.text.split(' ')
-        foundUser = Paie(prenom, surnom, nom)
+        user = tuple(instence.text.split(' '))
         self.screenManager.transition.direction = 'left'
         self.screenManager.current = 'details'
+        self.foundUser = Details()
+        self.foundUser.setUser(user)
+        self.userDetail = self.foundUser.getUser()
+        self.ids.DetailToolbar.title = f'{self.userDetail[0][1]} {self.userDetail[0][2]} {self.userDetail[0][3]}'
+        self.details.add_widget(self.foundUser.details)
+
 
 class Main(MDApp):
     def build(self):
@@ -37,7 +43,7 @@ class Main(MDApp):
 
     def on_start(self):
         self.save = Save()
-        self.employees = Employees()
+        self.employees = List()
         self.root.ids.tabs.add_widget(self.save)
         self.root.ids.tabs.add_widget(self.employees)
 
