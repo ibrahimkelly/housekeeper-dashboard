@@ -19,20 +19,15 @@ class Body(MDBoxLayout):
     def __init__(self, **kwargs):
         super(Body, self).__init__(**kwargs)
 
-    def backToHome(self):
-        self.screenManager.transition.direction = 'right'
-        self.screenManager.current = 'home'
-
     def showEmployeesDetails(self, instence) -> None:
         user = tuple(instence.text.split(' '))
         self.screenManager.transition.direction = 'left'
         self.screenManager.current = 'details'
-        self.foundUser = Details()
-        self.foundUser.setUser(user)
-        self.userDetail = self.foundUser.getUser()
-        self.ids.DetailToolbar.title = f'{self.userDetail[0][1]} {self.userDetail[0][2]} {self.userDetail[0][3]}'
-        self.details.add_widget(self.foundUser.details)
 
+        #clear the widget with it contains last user informations...
+        self.details.clear_widgets()
+        self.foundUser = Details(user)
+        self.details.add_widget(self.foundUser.details)
 
 class Main(MDApp):
     def build(self):
@@ -40,6 +35,10 @@ class Main(MDApp):
         self.theme_cls.primary_palette = 'Blue'
         self.body = Body()
         return self.body
+
+    def backToHome(self):
+        self.body.screenManager.transition.direction = 'right'
+        self.body.screenManager.current = 'home'
 
     def on_start(self):
         self.save = Save()

@@ -1,71 +1,121 @@
 <Details>:
+    id: details
     orientation: 'vertical'
     details: details.__self__
-    id: details
-    PaiementRowMonth:
-        PaiementInput:
-            id: janvier
-            hint_text: "Janvier"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "janvier", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: fevrier
-            hint_text: "Février"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "fevrier", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: mars
-            hint_text: "Mars"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "mars", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: avril
-            hint_text: "Avril"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "avril", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-    PaiementRowMonth:
-        PaiementInput:
-            id: mai
-            hint_text: "Mai"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "mai", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: juin
-            hint_text: "Juin"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "juin", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: juillet
-            hint_text: "Juillet"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "juillet", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: aout
-            hint_text: "Aout"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "aout", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-    PaiementRowMonth:
-        PaiementInput:
-            id: septembre
-            hint_text: "Septembre"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "septembre", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: octobre
-            hint_text: "Octobre"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "octobre", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: novembre
-            hint_text: "Novembre"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "novembre", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-        PaiementInput:
-            id: decembre
-            hint_text: "Décembre"
-            on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "decembre", self.text)
-            on_text: root.updateSomme(idForPaiement.text)
-    MDBoxLayout:
-        orientation: "horizontal"
-        InfosLabel:
-            id: total_paiement
+    MDToolbar:
+        id: detailToolbar
+        title: 'John Doe'
+        elevation: 10
+        pos_hint: {"top": 1}
+        left_action_items: [['arrow-left-circle', lambda x: app.backToHome()]]
+
+    MDSwiper:
+        MDSwiperItem:
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: root.height - detailToolbar.height - dp(40)
+                y: root.height - self.height - detailToolbar.height - dp(20)
+                PaiementRowMonth:
+                    PaiementInput:
+                        id: janvier
+                        hint_text: "Janvier"
+                        on_text: root.updatePaiement(paiementYear.text, "janvier", self.text)
+                        #on_text: root.updateSomme()
+                    PaiementInput:
+                        id: fevrier
+                        hint_text: "Février"
+                        on_text: root.updatePaiement(paiementYear.text, "fevrier", self.text)
+                        #on_text: root.updateSomme()
+                    PaiementInput:
+                        id: mars
+                        hint_text: "Mars"
+                        on_text: root.updatePaiement(paiementYear.text, "mars", self.text)
+                        #on_text: root.updateSomme()
+                    PaiementInput:
+                        id: avril
+                        hint_text: "Avril"
+                        on_text: root.updatePaiement(idForPaiement.text, paiementYear.text, "avril", self.text)
+                        #on_text: root.updateSomme()
+                PaiementRowMonth:
+                    PaiementInput:
+                        id: mai
+                        hint_text: "Mai"
+                        on_text: root.updatePaiement(paiementYear.text, "mai", self.text)
+                        #on_text: root.updateSomme()
+                    PaiementInput:
+                        id: juin
+                        hint_text: "Juin"
+                        on_text: root.updatePaiement(paiementYear.text, "juin", self.text)
+                        #on_text: root.updateSomme(idForPaiement.text)
+                    PaiementInput:
+                        id: juillet
+                        hint_text: "Juillet"
+                        on_text: root.updatePaiement(paiementYear.text, "juillet", self.text)
+                        #on_text: root.updateSomme()
+                    PaiementInput:
+                        id: aout
+                        hint_text: "Aout"
+                        on_text: root.updatePaiement(paiementYear.text, "aout", self.text)
+                        #on_text: root.updateSomme()
+                PaiementRowMonth:
+                    PaiementInput:
+                        id: septembre
+                        hint_text: "Septembre"
+                        on_text: root.updatePaiement(paiementYear.text, "septembre", self.text)
+                        #on_text: root.updateSomme()
+                    PaiementInput:
+                        id: octobre
+                        hint_text: "Octobre"
+                        on_text: root.updatePaiement(paiementYear.text, "octobre", self.text)
+                        #on_text: root.updateSomme()
+                    PaiementInput:
+                        id: novembre
+                        hint_text: "Novembre"
+                        on_text: root.updatePaiement(paiementYear.text, "novembre", self.text)
+                        #on_text: root.updateSomme(idForPaiement.text)
+                    PaiementInput:
+                        id: decembre
+                        hint_text: "Décembre"
+                        on_text: root.updatePaiement(paiementYear.text, "decembre", self.text)
+                        #on_text: root.updateSomme()
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    InfosLabel:
+                        id: total_paiement
+
+        MDSwiperItem:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: '24dp'
+                adaptive_height: True
+                pos_hint: {'top': 0.5}
+                InfosLabel:
+                    id: dUserName
+                    theme_text_color: "Primary"
+                    font_style: "H4"
+                UpdateInput:
+                    id: detteMontant
+                    hint_text: "Montant"
+                    max_text_length: 6
+                    icon_right: 'currency-usd'
+                    icon_right_color: app.theme_cls.primary_color
+                InfosLabel:
+                    id: detteInfos
+                    markup: True
+            MDBoxLayout:
+                orientation: 'horizontal'
+                #adaptive_width: True
+                spacing: '19dp'
+                MDFillRoundFlatIconButton:
+                    text: "Accorder"
+                    icon: 'check'
+                    font_size: "24dp"
+                    md_bg_color: app.theme_cls.primary_color
+                    on_press: root.setDette(idForDette.text)
+                MDFillRoundFlatIconButton:
+                    text: "Annuler"
+                    icon: 'cancel'
+                    font_size: "24dp"
+                    md_bg_color: (1, 0, 0, 1)
+                    on_press: root.clearDette()

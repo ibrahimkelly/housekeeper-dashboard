@@ -24,58 +24,10 @@
                         id: tabs
                         on_tab_switch: app.on_tab_switch(*args)
                         tab_hint_x: True
+
             MDScreen:
                 name: 'details'
-                MDToolbar:
-                    id: DetailToolbar
-                    title: 'John Doe'
-                    elevation: 10
-                    pos_hint: {"top": 1}
-                    left_action_items: [['arrow-left-circle', lambda x: root.backToHome()]]
-                MDBoxLayout:
-                    orientation: 'vertical'
-                    MDSwiper:
-                        size_hint_y: None
-                        height: root.height - DetailToolbar.height - dp(40)
-                        y: root.height - self.height - DetailToolbar.height - dp(20)
-                        MDSwiperItem:
-                            id: details
-
-                        MDSwiperItem:
-                            MDBoxLayout:
-                                orientation: "vertical"
-                                padding: '24dp'
-                                adaptive_height: True
-                                pos_hint: {'top': 0.5}
-                                InfosLabel:
-                                    id: dUserName
-                                    theme_text_color: "Primary"
-                                    font_style: "H4"
-                                UpdateInput:
-                                    id: detteMontant
-                                    hint_text: "Montant"
-                                    max_text_length: 6
-                                    icon_right: 'currency-usd'
-                                    icon_right_color: app.theme_cls.primary_color
-                                InfosLabel:
-                                    id: detteInfos
-                                    markup: True
-                            MDBoxLayout:
-                                orientation: 'horizontal'
-                                #adaptive_width: True
-                                spacing: '19dp'
-                                MDFillRoundFlatIconButton:
-                                    text: "Accorder"
-                                    icon: 'check'
-                                    font_size: "24dp"
-                                    md_bg_color: app.theme_cls.primary_color
-                                    on_press: root.setDette(idForDette.text)
-                                MDFillRoundFlatIconButton:
-                                    text: "Annuler"
-                                    icon: 'cancel'
-                                    font_size: "24dp"
-                                    md_bg_color: (1, 0, 0, 1)
-                                    on_press: root.clearDette()
+                id: details
 
         MDNavigationDrawer:
             id: nav_drawer
