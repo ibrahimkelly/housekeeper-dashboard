@@ -17,10 +17,9 @@ class Details(MDBoxLayout):
         "septembre", "octobre", "novembre", "decembre"
     ]
 
-    def __init__(self, user, **kwargs):
-        super(Details, self).__init__(user, **kwargs)
+    def __init__(self, **kwargs):
+        super(Details, self).__init__(**kwargs)
 
-        print('args : ', user, 'kwargs : ', kwargs)
         self.backend = DataBase()
 
     def getUserInfosForPaiement(self):
@@ -34,7 +33,7 @@ class Details(MDBoxLayout):
                     icon='plus',
                     text='Ajouter',
                     font_size=dp(24),
-                    on_press=lambda x: self.addNewYear(id)
+                    on_press=lambda x: self.addNewYear(self.id)
                 )
                 self.detailToolbar.add_widget(self.addYearButton)
             else:

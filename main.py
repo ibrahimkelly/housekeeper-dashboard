@@ -1,3 +1,4 @@
+from kivy.event import EventDispatcher
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -26,8 +27,9 @@ class Body(MDBoxLayout):
 
         #clear the widget with it contains last user informations...
         self.details.clear_widgets()
-        self.foundUser = Details(user)
-        self.details.add_widget(self.foundUser.details)
+        self.detailsCls = Details()
+        self.detailsCls.ids.detailToolbar.title = str(user)
+        self.details.add_widget(self.detailsCls.details)
 
 class Main(MDApp):
     def build(self):
