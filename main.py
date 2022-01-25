@@ -23,10 +23,9 @@ class Body(MDBoxLayout):
         user = tuple(instence.text.split(' '))
         self.screenManager.transition.direction = 'left'
         self.screenManager.current = 'details'
-
         #clear the widget with it contains last user informations...
         self.details.clear_widgets()
-        self.foundUser = Details(user)
+        self.foundUser = Details(user=user)
         self.details.add_widget(self.foundUser.details)
 
 class Main(MDApp):

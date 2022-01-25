@@ -17,7 +17,7 @@ class Details(MDBoxLayout):
         "septembre", "octobre", "novembre", "decembre"
     ]
 
-    def __init__(self, user, **kwargs):
+    def __init__(self, user: tuple, **kwargs):
         super(Details, self).__init__(user, **kwargs)
 
         print('args : ', user, 'kwargs : ', kwargs)
