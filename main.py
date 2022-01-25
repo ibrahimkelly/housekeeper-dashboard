@@ -1,3 +1,4 @@
+from kivy.event import EventDispatcher
 from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -20,13 +21,15 @@ class Body(MDBoxLayout):
         super(Body, self).__init__(**kwargs)
 
     def showEmployeesDetails(self, instence) -> None:
-        user = tuple(instence.text.split(' '))
+        prenom, surnom, nom = instence.text.split(' ')
         self.screenManager.transition.direction = 'left'
         self.screenManager.current = 'details'
         #clear the widget with it contains last user informations...
         self.details.clear_widgets()
-        self.foundUser = Details(user=user)
-        self.details.add_widget(self.foundUser.details)
+        self.detailsCls = Details()
+        self.detailsCls.setUser(prenom, surnom, nom)
+        #self.detailsCls.detailToolbar.title = str(user)
+        self.details.add_widget(self.detailsCls.details)
 
 class Main(MDApp):
     def build(self):

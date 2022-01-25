@@ -17,11 +17,16 @@ class Details(MDBoxLayout):
         "septembre", "octobre", "novembre", "decembre"
     ]
 
-    def __init__(self, user: tuple, **kwargs):
-        super(Details, self).__init__(user, **kwargs)
-
-        print('args : ', user, 'kwargs : ', kwargs)
+    def __init__(self, **kwargs):
+        super(Details, self).__init__(**kwargs)
+        #prenom, surnom, nom = self.detailToolbar.title
+        self.user = list()
         self.backend = DataBase()
+        #print(self.detailToolbar.title)
+
+    def setUser(self, prenom: str, surnom: str, nom: str):
+        self.user = self.backend.getEmployeesByFullName(prenom, surnom, nom)
+        self.detailToolbar.title = f'{self.user[0][1]} {self.user[0][2]} {self.user[0][3]}'
 
     def getUserInfosForPaiement(self):
         self.id = self.foundUser[0]
@@ -34,7 +39,7 @@ class Details(MDBoxLayout):
                     icon='plus',
                     text='Ajouter',
                     font_size=dp(24),
-                    on_press=lambda x: self.addNewYear(id)
+                    on_press=lambda x: self.addNewYear(self.id)
                 )
                 self.detailToolbar.add_widget(self.addYearButton)
             else:
