@@ -10,8 +10,6 @@ from components.saveComponent.Save import Save
 
 from files.backend import *
 
-backend = DataBase()
-
 class Body(MDBoxLayout):
 
     screenManager = ObjectProperty(None)
@@ -24,15 +22,16 @@ class Body(MDBoxLayout):
         prenom, surnom, nom = instence.text.split(' ')
         self.screenManager.transition.direction = 'left'
         self.screenManager.current = 'details'
+
         #clear the widget with it contains last user informations...
         self.details.clear_widgets()
         self.detailsCls = Details()
         self.detailsCls.setUser(prenom, surnom, nom)
-        #self.detailsCls.detailToolbar.title = str(user)
         self.details.add_widget(self.detailsCls.details)
 
 class Main(MDApp):
     def build(self):
+        self.backend = DataBase()
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'Blue'
         self.body = Body()
@@ -51,9 +50,8 @@ class Main(MDApp):
     def on_tab_switch(
         self, instance_tabs, instance_tab, instance_tab_label, tab_text
     ):
-
         if tab_text == 'Employers':
-            employees_list = backend.getEmployeesByNom('tous')
+            employees_list = self.backend.getEmployeesByNom('tous')
             instance_tab.ids.listContainer.clear_widgets()
             for i in range(len(employees_list)):
                 instance_tab.ids.listContainer.add_widget(

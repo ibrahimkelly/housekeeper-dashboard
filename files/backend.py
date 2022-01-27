@@ -90,8 +90,9 @@ class DataBase:
         return result
 
     def getEmployeesByNom(self, nom: str) -> list:
+        """Get employees list ordered by nom"""
         if (nom=='Tous' or nom=='tous'):
-            query = """SELECT id, prenom, surnom, nom, total_paiement, total_dette, epargne FROM employees"""
+            query = """SELECT id, prenom, surnom, nom, total_paiement, total_dette, epargne FROM employees ORDER BY nom"""
             self.curseur.execute(query)
             result = self.curseur.fetchall()
             return result
@@ -117,7 +118,7 @@ class DataBase:
         self.connection.commit()
 
     def checkAnneeExistence(self, id: int, annee) -> list:
-        checking_query = """SELECT * FROM paiements WHERE id=? AND annee=?"""
+        checking_query = """SELECT * FROM paiements WHERE id_employee=? AND annee=?"""
         self.curseur.execute(checking_query, (id, annee))
         result = self.curseur.fetchall()
         return result
@@ -130,7 +131,8 @@ class DataBase:
         return result
 
     def updatePaiement(self, id: int, year: int, mois: str, salaire: int) -> None:
-        if (id == "" or len(str(year)) != 4) or str(salaire) == "":
+        print(id, year, mois, salaire)
+        if (salaire==""):
             pass
         else:
             query = f"""UPDATE paiements SET {mois}={salaire} WHERE id_employee={id} AND annee={year}"""
@@ -228,7 +230,6 @@ class DataBase:
         SET epargne = (total_paiement - total_dette)
         WHERE id = {id}
         """
-        print("Epargne update")
         self.curseur.execute(query)
         self.connection.commit()
 
