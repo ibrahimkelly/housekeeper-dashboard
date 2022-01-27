@@ -132,12 +132,10 @@ class DataBase:
 
     def updatePaiement(self, id: int, year: int, mois: str, salaire: int) -> None:
         print(id, year, mois, salaire)
-        if (salaire==""):
-            pass
-        else:
-            query = f"""UPDATE paiements SET {mois}={salaire} WHERE id_employee={id} AND annee={year}"""
-            self.curseur.execute(query)
-            self.connection.commit()
+        salaire = 0 if salaire=="" else salaire
+        query = f"""UPDATE paiements SET {mois}={salaire} WHERE id_employee={id} AND annee={year}"""
+        self.curseur.execute(query)
+        self.connection.commit()
 
     def updateTotal(self, id: int, year: int):
         query = """
