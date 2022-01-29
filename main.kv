@@ -1,15 +1,37 @@
 #:kivy 2.0.0
 #:include components/saveComponent/saveComponent.kv
 #:include components/listComponent/listComponent.kv
-##:kivymd 0.104.2
+#:include components/details/detailsComponent.kv
+#:include components/customWidgets.kv
 
 <Body>:
     orientation: "vertical"
+    screenManager: screenManager
+    details: details
+    MDNavigationLayout:
+        ScreenManager:
+            id: screenManager
+            MDScreen:
+                name: 'home'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDToolbar:
+                        title: "GIE Djiguiya"
+                        elevation: 10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
 
-    MDToolbar:
-        title: "Groupement d'Interet Economique (GIE) Djiguiya".upper()
+                    MDTabs:
+                        id: tabs
+                        on_tab_switch: app.on_tab_switch(*args)
+                        tab_hint_x: True
 
-    MDTabs:
-        id: tabs
-        on_tab_switch: app.on_tab_switch(*args)
-        tab_hint_x: True
+            MDScreen:
+                name: 'details'
+                id: details
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            size_hint_x: 0.75
+            MDLabel:
+                text: 'Hello World'
+                halign: "center"
