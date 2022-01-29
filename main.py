@@ -60,7 +60,7 @@ class Main(MDApp):
                         secondary_text=f'PAIEMENTS : [b][color=#ff0]{employees_list[i][4]} F CFA[/color][/b]',
                         tertiary_text=f'EPARGNE : [b][color=#ff0]{employees_list[i][6]} F CFA[/color][/b]',
                         theme_text_color='Primary',
-                        font_style='H6',
+                        #font_style='H6',
                         secondary_theme_text_color='Primary',
                         tertiary_theme_text_color='Primary',
                         bg_color=(0, 0, 0) if i%2==0 else self.theme_cls.primary_color,

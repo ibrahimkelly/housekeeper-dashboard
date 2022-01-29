@@ -157,6 +157,13 @@ class DataBase:
             result = 0
         return result
 
+    def getEmployeesDetteList(self, id: int) -> list[any]:
+        """Get all credits (dettes) from an employee"""
+        query = """SELECT * FROM dettes WHERE id_employee=? ORDER BY date_credit"""
+        self.curseur.execute(query, (id,))
+        result = self.curseur.fetchall()
+        return result
+
     def getTotalDette(self, id: int) -> int:
         query = """SELECT total_dette FROM employees WHERE id=?"""
         self.curseur.execute(query, (id,))

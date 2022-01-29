@@ -6,6 +6,8 @@
     year: year
     addYearButton: addYearButton.__self__
     paie_tab: paie_tab
+    detteMontant: detteMontant
+    listDette: listDette.__self__
     MDToolbar:
         id: detailToolbar
         title: 'John Doe'
@@ -16,6 +18,7 @@
 
     MDSwiper:
         items_spacing: '0dp'
+        on_swipe: root.getEmployeesDetteList()
         MDSwiperItem:
             MDBoxLayout:
                 orientation: 'vertical'
@@ -113,35 +116,134 @@
         MDSwiperItem:
             MDBoxLayout:
                 orientation: "vertical"
-                padding: '24dp'
                 adaptive_height: True
-                pos_hint: {'top': 0.5}
-                InfosLabel:
-                    id: dUserName
-                    theme_text_color: "Primary"
-                    font_style: "H4"
-                UpdateInput:
-                    id: detteMontant
-                    hint_text: "Montant"
-                    max_text_length: 6
-                    icon_right: 'currency-usd'
-                    icon_right_color: app.theme_cls.primary_color
-                InfosLabel:
-                    id: detteInfos
-                    markup: True
+                pos_hint: {'top': 1}
+                MDBoxLayout:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    padding: '24dp'
+                    InfosLabel:
+                        id: dUserName
+                        theme_text_color: "Primary"
+                        font_style: "H4"
+                    UpdateInput:
+                        id: detteMontant
+                        hint_text: "Montant"
+                        max_text_length: 6
+                        icon_right: 'currency-usd'
+                        icon_right_color: app.theme_cls.primary_color
+                    InfosLabel:
+                        id: detteInfos
+                        markup: True
+                MDBoxLayout:
+                    orientation: 'horizontal'
+                    adaptive_height: True
+                    adaptive_width: True
+                    spacing: '19dp'
+                    pos_hint: {'center_x': 0.5}
+                    MDFillRoundFlatIconButton:
+                        text: 'Accorder'
+                        icon: 'check'
+                        font_size: "24dp"
+                        md_bg_color: app.theme_cls.primary_color
+                        on_press: root.setDette(root.detteMontant.text)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    MDFillRoundFlatIconButton:
+                        text: 'Annuler'
+                        icon: 'cancel'
+                        font_size: '24dp'
+                        md_bg_color: (1, 0, 0, 1)
+                        on_press: root.clearDette()
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    adaptive_height: True
+                    height: (root.height*.60)
+                    padding: '24dp'
+                    ScrollView:
+                        MDList:
+                            id: listDette
+        MDSwiperItem:
             MDBoxLayout:
-                orientation: 'horizontal'
-                #adaptive_width: True
-                spacing: '19dp'
-                MDFillRoundFlatIconButton:
-                    text: "Accorder"
-                    icon: 'check'
-                    font_size: "24dp"
-                    md_bg_color: app.theme_cls.primary_color
-                    on_press: root.setDette(idForDette.text)
-                MDFillRoundFlatIconButton:
-                    text: "Annuler"
-                    icon: 'cancel'
-                    font_size: "24dp"
-                    md_bg_color: (1, 0, 0, 1)
-                    on_press: root.clearDette()
+                orientation: "vertical"
+                #adaptive_height: True
+                UpdateGrid:
+                    UpdateInput:
+                        id: updatePrenom
+                        hint_text: "Prénom"
+                        max_text_length: 13
+                    UpdateInput:
+                        id: updateDateDebut
+                        hint_text: "Date de debut"
+                        icon_right: 'calendar'
+                        icon_right_color: app.theme_cls.primary_color
+                        on_focus: root.shooseStartDate()
+                UpdateGrid:
+                    UpdateInput:
+                        id: updateSurnom
+                        hint_text: "Surnom"
+                        max_text_length: 13
+                    UpdateInput:
+                        id: updatePrenomTuteur
+                        hint_text: "Prénom du tuteur"
+                        max_text_length: 13
+                UpdateGrid:
+                    UpdateInput:
+                        id: updateNom
+                        hint_text: "Nom"
+                        max_text_length: 13
+                    UpdateInput:
+                        id: updateNomTutuer
+                        hint_text: "Nom du tuteur"
+                        max_text_length: 13
+                UpdateGrid:
+                    UpdateInput:
+                        id: updateDateEntrer
+                        hint_text: "Date d'entrer"
+                        icon_right: 'calendar'
+                        icon_right_color: app.theme_cls.primary_color
+                        on_focus: root.shooseEnterDate()
+                    UpdateInput:
+                        id: updateTuteurContact
+                        hint_text: "Contact du tuteur"
+                        icon_right: 'phone'
+                        icon_right_color: app.theme_cls.primary_color
+                        max_text_length: 13
+                UpdateGrid:
+                    UpdateInput:
+                        id: updateSalaire
+                        hint_text: "Salaire"
+                        icon_right: 'currency-eur'
+                        icon_right_color: app.theme_cls.primary_color
+                        max_text_length: 6
+                    UpdateInput:
+                        id: updateAdressTuteur
+                        hint_text: "Adresse du tuteur"
+                        icon_right: 'google-maps'
+                        icon_right_color: app.theme_cls.primary_color
+                        max_text_length: 13
+                MDBoxLayout:
+                    orientation: "vertical"
+                    InfosLabel:
+                        id: updateInfos
+
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'bottom'
+                    padding: '19dp'
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        adaptive_width: True
+                        spacing: '19dp'
+                        MDFillRoundFlatIconButton:
+                            text: "Mettre à jour"
+                            icon: 'check'
+                            font_size: "24dp"
+                            md_bg_color: app.theme_cls.primary_color
+                            on_release: root.set_update()
+                        MDFillRoundFlatIconButton:
+                            text: "Annuler"
+                            icon: 'cancel'
+                            font_size: "24dp"
+                            md_bg_color: (1, 0, 0, 1)
+                            on_release: root.get_user_details()
